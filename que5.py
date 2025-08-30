@@ -1,6 +1,12 @@
 """
-5. Find Area of Cube formula : a = 6a2
+5. Write a program in C to compare two strings without using string library
+functions.
 """
-l = int(input("Enter length"))
-Area = 6*l**2
-print(f"Area of Cube{Area}")
+str1 = "Hello"
+str2 = "Hola"
+if str1 == str2:
+    print("Both are equal")
+elif str1 > str2:
+    print("str 1 is greater")
+else:
+    print("str 2 is greater")

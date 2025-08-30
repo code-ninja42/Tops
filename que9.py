@@ -1,6 +1,12 @@
 """
-Find circumference of Triangle formula : triangle = a + b + c
+9. Write a program in C to find the maximum number of characters in a string
 """
-a,b,c = map(int,input("Enter 3 side").split())
-circumference = a  + b + c
-print("Triangle cir",circumference)
+str = input("Enter a string")
+max_char = ''
+max_count = 0
+for ch in str:
+    count =str.count(ch)
+    if count > max_count:
+        max_count = count
+        max_char = ch
+print(f"character :{max_char} and appearing:{max_count}")

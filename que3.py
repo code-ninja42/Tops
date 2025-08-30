@@ -1,9 +1,7 @@
 """
-WAP to Find Area And Circumference of Circle
-
+3. Write a program in C to print individual characters of a string in reverse order
 """
-Radius = int(input("Enter radius "))
-Area = 3.14 * Radius * Radius
-Circumference = 2 * 3.14 *Radius
-print(f"Area of: {Area}")
-print(f"Circumference of circle:{Circumference}")
+name = input("Enter string")
+print(name)
+for i in name[::-1]:
+    print(i)

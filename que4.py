@@ -1,6 +1,6 @@
 """
-4. Find Area of Square formula : a = a2
-"""
-length = int(input("Enter length"))
-Area = length ** 2
-print(f"Area:{Area}")
+4. Write a program in C to count the total number of words in a string.
+""" 
+str = input("Enter String")
+words = str.split()
+print("Total words:",len(words))

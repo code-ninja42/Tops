@@ -1,6 +1,13 @@
 """
-Find circumference of Rectangle formula : C = 4 * a
+11.Write a program in C to read a sentence and replace lowercase characters with
+uppercase and vice versa.
 """
-a = int(input("Enter length"))
-Circumference = 4 * a
-print(f"Circumference of square : {Circumference}")
+s1 = input("Enter string")
+print(s1)
+s2 = ""
+for c in s1:
+    if c.isupper():
+        s2 += "".join(c.lower())
+    else:
+        s2 += "".join(c.upper())
+print(s2)

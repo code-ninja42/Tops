@@ -1,7 +1,7 @@
 """
-Find area of Rectangle Formula : A=wl
+7. Write a program in C to copy one string to another string
 """
-w = int(input("Enter width"))
-l  = int(input("Enter length"))
-area = w*l
-print(f"area of Rectangle: {area}")
+str = "Hello WOrld"
+str1 = str
+#print("Original")
+print("copy:",str1)
