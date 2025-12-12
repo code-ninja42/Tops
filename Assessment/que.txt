@@ -1,0 +1,21 @@
+Assessment 3
+Hotel Reservation System
+Design a Python class HotelReservation that simulates a simple hotel room booking
+system. It should include the following features:
+➔ Room Booking:
+◆ Prompt user for name, contact number, and number of nights.
+◆ Display room types:
+● Standard: ₹2000/night
+● Deluxe: ₹3500/night
+● Suite: ₹5000/night
+◆ Allow the user to select a room type and calculate total cost.
+➔ Payment & Confirmation:
+◆ Ask for confirmation of the booking and process payment.
+◆ Generate a unique booking ID for each reservation.
+➔ Menu Options:
+◆ View Booking
+◆ Cancel Booking (Only allowed before check-in)
+◆ Exit
+➔ Constraints:
+◆ Contact number must be 10 digits.
+◆ Only one active booking per user.
