@@ -1,0 +1,198 @@
+que 1 
+1. write a SQL query to find customers who are either from the city 'NewYork' or
+who do not have a grade greater than 100. Return customer_id, cust_name, city, grade, and salesman_id.
+SELECT customer_id,cust_name,city,grade,salesman_id
+FROM customer
+where city = 'New York'
+or NOT grade > 100;
+
+que 2 
+2. write a SQL query to find all the customers in ‘New York’ city who have agradevalue above 100. Return customer_id, cust_name, city, grade, and salesman_id. 
+SELECT * from customer
+WHERE city = 'New York'
+and grade > 100;
+
+que 3 
+3. Write a SQL query that displays order number, purchase amount, and the
+achieved and unachieved percentage (%) for those orders that exceed 50%of thetarget value of 6000
+
+que 4 
+4. write a SQL query to calculate the total purchase amount of all orders. Returntotal purchase amount.
+SELECT sum(purch_amt) as total_purchase_amount
+FROM orders;
+
+que 5 
+5. write a SQL query to find the highest purchase amount ordered by each customer. Return customer ID, maximum purchase amount.
+SELECT customer_id,max(purch_amt) as max_amt
+from orders 
+GROUP by customer_id
+order by max_amt desc;
+
+que 6 
+6. write a SQL query to calculate the average product price. Return average product
+price.
+SELECT AVG(purch_amt)
+FROM orders;
+
+que 7 
+7. write a SQL query to find those employees whose department is located at ‘Toronto’. Return first name, last name, employee ID, job ID.
+SELECT e.first_name, e.last_name, e.emp_id, e.job_id
+FROM employee e
+JOIN department d
+ON e.department_id = d.department_id
+WHERE d.city = 'Toronto';
+
+que 8
+
+que 9 
+9. write a SQL query to find all those employees who work in department ID80or40. Return first name, last name, department number and department name.
+SELECT e.first_name, e.last_name, e.department_id, d.department_name
+FROM employee e
+JOIN department d
+ON e.department_id = d.department_id
+WHERE e.department_id = 80 OR e.department_id = 40;
+
+que 10 
+10.write a SQL query to calculate the average salary, the number of employees
+receiving commissions in that department. Return department name, averagesalary and number of employees.
+SELECT 
+d.department_name,
+AVG(e.salary) AS average_salary,
+COUNT(e.commission) AS number_of_employees
+FROM employee e 
+join department d 
+on e.department_id = d.department_id
+GROUP by d.department_name;
+
+que 11
+11.write a SQL query to find out which employees have the same designationas theemployee whose ID is 169. Return first name, last name, department ID and jobID.
+SELECT * from employee
+WHERE job_id = (
+    SELECT job_id
+    FROM employee
+    WHERE emp_id = 169
+);
+
+que 12
+12.write a SQL query to find those employees who earn more than the averagesalary. Return employee ID, first name, last name
+SELECT * from employee
+where salary > (
+    SELECT avg(salary) as avg_sal
+    from employee
+    );
+
+que 13
+13.write a SQL query to find all those employees who work in the Finance
+department. Return department ID, name (first), job ID and department name
+SELECT e.department_id, e.first_name, e.job_id, d.department_name
+FROM employee e
+JOIN department d
+ON e.department_id = d.department_id
+WHERE d.department_name = 'Finance';
+
+que 14
+14. From the following table, write a SQL query to find the employees whoearnlessthan the employee of ID 182. Return first name, last name and salarySELECT first_name, last_name, salary
+FROM employee
+WHERE salary < (
+    SELECT salary
+    FROM employee
+    WHERE emp_id = 182
+);
+
+que 15 
+15.Create a stored procedure CountEmployeesByDept that returns the number of
+employees in each department
+DELIMITER $$
+
+CREATE PROCEDURE CountEmployeesByDept()
+BEGIN
+    SELECT department_id, COUNT(*) AS total_emp
+    FROM employee
+    GROUP BY department_id;
+END $$
+
+DELIMITER ;
+CALL CountEmployeesByDept();
+
+que 16
+16.Create a stored procedure AddNewEmployee that adds a new employee tothedatabase
+DELIMITER $$
+
+CREATE PROCEDURE AddNewEmployees(
+    IN p_emp_id INT,
+    IN p_first_name VARCHAR(50),
+    IN p_last_name VARCHAR(50),
+    IN p_salary DECIMAL(10,2),
+    IN p_job_id VARCHAR(20),
+    IN p_commission DECIMAL(5,2),
+    IN p_department_id INT,
+    IN p_manager_id INT
+)
+BEGIN
+    INSERT INTO employee(emp_id, first_name, last_name, salary, job_id, commission, department_id, manager_id)
+    VALUES (p_emp_id, p_first_name, p_last_name, p_salary, p_job_id, p_commission, p_department_id, p_manager_id);
+END $$
+
+DELIMITER ;
+CALL AddNewEmployees(555111, 'David', 'Smith', 50000, 'IT_PROG', 0.05, 47, 103);
+SELECT * From employee;
+
+que 17 
+17.Create a stored procedure DeleteEmployeesByDept that removes all employeesfrom a specific department
+DELIMITER $$
+CREATE PROCEDURE DeleteEmployee(
+    in p_department_id INT
+    )
+    BEGIN
+    DELETE from employee
+    where department_id = p_department_id;
+   END $$ 
+   DELIMITER ;
+   
+CALL  DeleteEmployee(1);
+    
+que 18
+18.Create a stored procedure GetTopPaidEmployees that retrieves the highest-paidemployee in each department. 19.Create a stored procedure PromoteEmployee that increases an employee’s salaryand changes their job role. 20.Create a stored procedure AssignManagerToDepartment that assigns a newmanager to all employees in a specific department
+DELIMITER $$
+
+CREATE PROCEDURE GetTopPaidEmp()
+BEGIN
+    SELECT department_id, MAX(salary) AS max_sal
+    FROM employee
+    GROUP BY department_id;
+END $$
+
+DELIMITER ;
+call GetTopPaidEmp()
+
+que 19
+19.Create a stored procedure PromoteEmployee that increases an employee’s salaryand changes their job role
+DELIMITER $$
+CREATE PROCEDURE PromoteEmployee(
+    IN p_emp_id int,
+    IN p_new_salary decimal(10,2),
+    IN p_new_job_id varchar(20)
+    )
+BEGIN 
+	UPDATE employee
+    SET salary = p_new_salary,
+    job_id = p_new_job_id
+    where emp_id = p_emp_id;
+end $$;
+DELIMITER ;
+CALL PromoteEmployee(444527, 80000, 'HR_MAN');
+
+que 20
+20.Create a stored procedure AssignManagerToDepartment that assigns a newmanager to all employees in a specific department.
+DELIMITER $$
+CREATE PROCEDURE AssignManagerToDepartment(
+    IN p_department_id int,
+    IN p_manager_id int
+    )
+BEGIN 
+	UPDATE employee
+    SET manager_id = p_manager_id
+    where department_id = p_department_id;
+end $$;
+DELIMITER ;
+CALL AssignManagerToDepartment(47, 200);
