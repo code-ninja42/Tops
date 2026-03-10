@@ -1,0 +1,30 @@
+que 1:- Now commute the following tasks :
+que1:-Task : 1 (join multiple tables using left join)
+List all Countries and customers related to these countries.
+For each country displaying its name in English, the name of the city customer is located in as
+well as the name of the customer.
+Return even countries without related cities and customers
+
+SELECT 
+c1.country_name_eng,
+c2.city_name,
+c3.customer_name
+FROM country c1
+LEFT JOIN city c2
+ON c1.id = c2.country_id
+LEFT JOIN customer c3
+ON c2.id = c3.city_id;
+
+Task : 2 (join multiple tables using both left and inner join)
+Return the list of all countries that have pairs(exclude countries which are not referenced by any
+city). For such pairs return all customers.
+Return even pairs of not having a single customer
+SELECT 
+    c1.country_name_eng,
+    c2.city_name,
+    c3.customer_name
+FROM country c1
+INNER JOIN city c2
+    ON c1.id = c2.country_id
+LEFT JOIN customer c3
+    ON c2.id = c3.city_id;
