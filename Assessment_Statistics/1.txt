@@ -1,0 +1,57 @@
+#que 1 
+import numpy as np
+a = np.arange(1,9)
+print(a)
+b = a.reshape(4 ,2)
+print(b)
+#que 2
+import numpy as np
+a = np.array([1,2,3,2,3,4,3,4,5,6])
+b = np.array([7,2,10,2,7,4,9,4,9,8])
+print(np.intersect1d(a,b))
+#que 3
+import numpy as np
+a = np.array([2, 6, 1, 9, 10, 3, 27])
+result = a[(a>=5) & (a<=10)]
+print(result)
+#Que 4
+don't understand what the que is asking
+#Que 1
+import pandas as pd
+series = pd.Series([10,20,30,40,50])
+print(series.describe())
+#Que 2
+import pandas as pd
+df = pd.DataFrame({
+    "Name":["Alice","Jack","Bob","Alice"],
+    "City":["USA","UK","AUS","UAE"]
+})
+df
+#Que 3
+import pandas as pd
+import numpy as np
+data = np.random.randint(1,100,size=(5,3))
+df = pd.DataFrame(data)
+print(df)
+#Que 4
+Default labels for row(index)->start from 0,1,2..
+Columns->also start from 0,1,2...
+#Que 5
+df = pd.read_csv("matches.csv")
+df.head()
+#Que 6
+df.shape
+#Que 7
+df.head()
+#Que 8
+series
+#Que 9
+import matplotlib.pyplot as plt
+x = [3, 4, 5, 6]
+y = [1.5, 2, 2.5, 3]
+plt.plot(x,y)
+plt.xlabel("X values")
+plt.ylabel("Y value")
+plt.show()
+-----------------------
+The topics are not covered yet
